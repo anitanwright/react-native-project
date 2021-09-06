@@ -9,7 +9,7 @@ export const ROOMS = [
     },
     {
         id: 1,
-        name:"The Green Room ",
+        name:"The Cambridge Room ",
         image: "/assets/images/",
         elevation: 877,
         featured: false,
@@ -17,7 +17,7 @@ export const ROOMS = [
     },
     {
         id: 2,
-        name:"The Bayside Room",
+        name:"The Moorside Room",
         image: "/assets/images/breadcrumb-trail.jpg",
         elevation: 2901,
         featured: false,
@@ -25,10 +25,18 @@ export const ROOMS = [
     },
     {
         id: 3,
-        name:"The Moorside Suite",
+        name:"The Somerset Suite",
         image: "/assets/images/redux-woods.jpg",
         elevation: 42,
         featured: true,
         description: "You'll never want to leave this hidden gem! Perfect for an active weekend getaway."
+    },
+    {
+        id: 4,
+        name:"The Glastonbury",
+        image: "/assets/images/redux-woods.jpg",
+        elevation: 42,
+        featured: true,
+        description: "This is one for you glampers. All of the fun of camping, with a side of luxury!"
     }
 ];
