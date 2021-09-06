@@ -1,27 +1,42 @@
-import React from 'react';
+import React, { Component }from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { ROOMS } from '../shared/rooms';
 
-function Directory(props) {
+class Directory extends Component {
 
-    const renderDirectoryItem = ({item}) => {
-        return (
-            <ListItem
-                title={item.name}
-                subtitle={item.description}
-                onPress={() => props.onPress(item.id)}
-                leftAvatar={{ source: require('./images/react-lake.jpg')}}
-            />
-        );
+    constructor(props) {
+        super(props);
+        this.state = {
+            rooms: ROOMS
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Directory'
     };
 
-    return (
-        <FlatList
-            data={props.rooms}
-            renderItem={renderDirectoryItem}
-            keyExtractor={item => item.id.toString()}
-        />
-    );
+    render() {
+        const { navigate } = this.props.navigation;
+        const renderDirectoryItem = ({item}) => {
+            return (
+                <ListItem
+                    title={item.name}
+                    subtitle={item.description}
+                    onPress={() => navigate('RoomInfo', { roomId: item.id})}
+                    leftAvatar={{ source: require('./images/react-lake.jpg')}}
+                />
+            );
+        };
+
+        return (
+            <FlatList
+                data={this.state.rooms}
+                renderItem={renderDirectoryItem}
+                keyExtractor={item => item.id.toString()}
+            />
+        );
+    }
 }
 
 export default Directory;

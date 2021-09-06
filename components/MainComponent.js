@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
 import Directory from './DirectoryComponent';
 import RoomInfo from './RoomInfoComponent';
-import { View } from 'react-native';
-import { ROOMS } from '../shared/rooms';
+import Constants from 'expo-constants';
+import { View, Platform } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+
+const DirectoryNavigator = createStackNavigator(
+    {
+        Directory: { screen: Directory },
+        RoomInfo: { screen: RoomInfo }
+    },
+    {
+        initialRouteName: 'Directory',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'black',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
+
+const AppNavigator = createAppContainer(DirectoryNavigator);
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            rooms: ROOMS,
-            selectedRoom: null
-        };
-    }
-
-    onRoomSelect(roomId) {
-        this.setState({selectedRoom: roomId});
-    }
-
     render() {
         return (
-            <View style={{flex: 1}}>
-                <Directory 
-                    rooms={this.state.rooms}
-                    onPress={roomId => this.onRoomSelect(roomId)}
-                />
-                <RoomInfo
-                    room={this.state.rooms.filter(
-                        room => room.id === this.state.selectedRoom)[0]}
-                />
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+            }}>
+                <AppNavigator />
             </View>
         );
     }

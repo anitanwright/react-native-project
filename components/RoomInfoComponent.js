@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component }from 'react';
 import { Text, View } from 'react-native';
 import { Card } from 'react-native-elements';
+import { ROOMS } from '../shared/rooms';
+
 
 function RenderRoom({room}) {
     if (room) {
@@ -18,8 +20,24 @@ function RenderRoom({room}) {
     return <View />;
 }
 
-function RoomInfo(props) {
-    return <RenderRoom room={props.room} />;
+class RoomInfo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            rooms: ROOMS
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Room Information'
+    }
+
+    render() {
+        const roomId = this.props.navigation.getParam('roomId');
+        const room = this.state.rooms.filter(room => room.id === roomId)[0];
+        return <RenderRoom room={room} />;
+}
 }
 
 export default RoomInfo;
